@@ -1,0 +1,34 @@
+//色彩标准
+$color-orange: #fd9e4e;
+$color-grey: #efefef;
+$color-grey__deep: #999;
+
+//字体大小标准
+$font-size: 0.9rem;
+$font-size-sm: 0.8rem;
+$font-size-xs: 0.6rem;
+
+$font-size-icon: 24px;
+
+// 板块之间的padding
+$padding: 10px;
+
+// 标准行高
+$line-height: 1.22;
+$line-height-font: 1.55;
+$line-height-title: 1.8;
+
+$boder-radius: 3px;
+
+// 商品图片宽高
+@mixin img {
+  width: 3.6rem;
+  height: 4.3rem;
+  border-radius: $boder-radius;
+}
+
+@mixin img-avator {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+}

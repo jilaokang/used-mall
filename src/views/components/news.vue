@@ -6,9 +6,11 @@
                 <div class="weui-cell__hd news-title">
                     <i>最新快报</i>
                 </div>
-                <div class="weui-cell__bd news-content">
-                    <p>李易峰出售自己的机车外套</p>
-                </div>
+                <router-link :to="'/detail#' + data.id">
+                    <div class="weui-cell__bd news-content">
+                        <p>{{data.desc}}</p>
+                    </div>
+                </router-link>
             </div>
         </div>
     </div>
@@ -19,6 +21,7 @@
 
     export default {
         name: "news",
+        props: ['data'],
         components: {
             placeholder
         }

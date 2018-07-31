@@ -12,7 +12,3 @@
         components: {nomore}
     }
 </script>
-
-<style scoped>
-
-</style>

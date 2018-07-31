@@ -1,23 +1,29 @@
 <template class="message">
-    <div class="weui-cells">
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <img class="avator" src="../../assets/img/avator.jpg">
-            </div>
-            <div class="weui-cell__bd content">
-                <h5 class="user">蔡豪杰</h5>
-                <p class="mes">你的快递到了</p>
-                <p class="time">1小时前</p>
-            </div>
-            <div class="weui-cell__hd goodimg">
-            </div>
+    <div>
+        <div class="weui-cells" v-for="item of data.mess">
+            <router-link :to="'/chat#' + item.id +'#'+item.openid">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <img class="avator" :src="item.headimgurl">
+                    </div>
+                    <div class="weui-cell__bd content">
+                        <h5 class="user">{{item.nickname}}</h5>
+                        <p class="mes">{{item.contents}}</p>
+                        <p class="time">{{item.now_time}}</p>
+                    </div>
+                    <div class="weui-cell__hd goodimg"
+                         :style="'background-image:url('+'http://whschoolbbs.tenqent.com'+item.g_pic+')'">
+                    </div>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "message"
+        name: "message",
+        props: ['data']
     }
 </script>
 
@@ -31,7 +37,8 @@
     .content {
         padding: 0 10px;
         line-height: $line-height-font;
-        .user{
+        .user {
+            color: #333;
             font-size: $font-size;
         }
         .mes {
@@ -50,7 +57,7 @@
             position: center;
             repeat: no-repeat;
             size: cover;
-            image: url("../../assets/img/6E6F1DB90378F60CFAE0F9DE2C00B79B.jpg");
+            /*image: url("../../assets/img/6E6F1DB90378F60CFAE0F9DE2C00B79B.jpg");*/
         }
     }
 

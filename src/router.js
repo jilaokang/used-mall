@@ -11,7 +11,8 @@ import message from './views/pages/message'
 import push from './views/pages/push'
 import search from './views/pages/search'
 import index from './views/pages/index'
-import mygood from './views/pages/mygood'
+import mygood from './views/pages/mypush'
+import collect from './views/pages/collect'
 
 Vue.use(Router);
 
@@ -62,6 +63,10 @@ export default new Router({
                 {
                     path: 'mygood',
                     component: mygood
+                },
+                {
+                    path: 'collect',
+                    component: collect
                 }
             ]
         }

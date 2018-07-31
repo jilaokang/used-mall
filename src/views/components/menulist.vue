@@ -43,7 +43,7 @@
             height: $font-size-icon;
             background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
             border-radius: 50%;
-            padding: 10px;
+            padding: 6px;
             margin: 0 auto;
         }
         .iconfont {

@@ -81,7 +81,7 @@
                 border: 3px solid $color-orange;
                 transform: rotate(90deg);
                 background: #fff;
-                -webkit-transition: background 1s, transform 1s;
+                -webkit-transition: transform 0.6s;
             }
         }
     }

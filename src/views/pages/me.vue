@@ -2,8 +2,8 @@
     <div>
         <div id="avator" class="weui-flex">
             <div class="weui-flex__item">
-                <img src="../../assets/img/avator.jpg" alt="">
-                <p class="avator-name">基佬康kkk</p>
+                <img :src="user.headimgurl" alt="">
+                <p class="avator-name">{{user.nickname}}</p>
             </div>
         </div>
         <div class="weui-cells">
@@ -12,21 +12,35 @@
                     <input class="weui-select" value="我的发布" disabled></input>
                 </div>
                 <div class="weui-cell__hd icon">
-                    8
+                    {{mypush}}
                 </div>
             </router-link>
-            <div class="weui-cell weui-cell_select">
-                <div class="weui-cell__bd">
-                    <input class="weui-select" value="我的发布" disabled></input>
+            <router-link to="/collect">
+                <div class="weui-cell weui-cell_select">
+                    <div class="weui-cell__bd">
+                        <input class="weui-select" value="我的收藏" disabled></input>
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
+    import {personcenter, mypush} from '../../service/data'
+
     export default {
-        name: "me"
+        name: "me",
+        data() {
+            return {
+                user: "",
+                mypush: ''
+            }
+        },
+        created() {
+            personcenter().then(res => this.user = res.data.users)
+            mypush().then(res => this.mypush = res.data.list.length)
+        }
     }
 </script>
 

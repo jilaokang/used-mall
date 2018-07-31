@@ -4,6 +4,15 @@
     </div>
 </template>
 
+<script>
+    import {personcenter} from './service/data'
+
+    export default {
+        mounted() {
+        }
+    }
+</script>
+
 <style lang="scss">
     @import "views/scss/var";
 
@@ -22,7 +31,7 @@
     }
 
     body {
-        background: $color-grey;
+        background: $color-grey__bg;
     }
 
     .weui-btn_primary {
@@ -35,5 +44,9 @@
 
     .weui-cells {
         margin-top: 0 !important;
+    }
+
+    .weui-dialog__btn ,.weui-dialog__btn_primary {
+        color: $color-orange !important;
     }
 </style>

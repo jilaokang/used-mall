@@ -15,7 +15,7 @@
 </script>
 
 <style lang="scss">
-    @import url("http://at.alicdn.com/t/font_764875_t9a25w9ik2.css");
+    @import url("http://at.alicdn.com/t/font_764875_8n76f8fw3o5.css");
     @import "../scss/var";
 
     p {

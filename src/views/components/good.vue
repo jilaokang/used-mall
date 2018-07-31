@@ -1,40 +1,29 @@
 <template>
     <div>
-        <div class="weui-cells good">
-            <router-link to="/detail">
+        <div class="weui-cells good" v-for="item in data">
+            <router-link :to="'/detail#'+item.id">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd good__img">
+                    <div class="weui-cell__hd good__img" :style="'background-image:url('+'http://whschoolbbs.tenqent.com'+item.g_pic+')'">
                     </div>
                     <div class="weui-cell__bd good—list">
                         <div class="good-list__title">
-                            苹果X，便宜大甩卖啦苹果X
+                            {{item.g_title}}
                         </div>
                         <div class="good-list ">
-                            <p style="float: left">￥50.0</p>
-                            <p style="float: right">3C产品</p>
+                            <p style="float: left">￥{{item.g_price}}</p>
+                            <p style="float: right">{{item.cate_name}}</p>
                         </div>
                     </div>
                 </div>
             </router-link>
-            <div class="weui-cell">
-                <div class="weui-cell__hd good__img">
-                </div>
-                <div class="weui-cell__bd good—list">
-                    <div class="good-list__title">
-                        苹果X，便宜大甩卖啦苹果X
-                    </div>
-                    <div class="good-list ">
-                        <p style="float: left">￥50.0</p>
-                        <p style="float: right">3C产品</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+        props: ['data']
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +33,7 @@
         .good__img {
             @include img;
             background: {
-                image: url("../../assets/img/6E6F1DB90378F60CFAE0F9DE2C00B79B.jpg");
+                /*image: url("../../assets/img/6E6F1DB90378F60CFAE0F9DE2C00B79B.jpg");*/
                 position: center;
                 repeat: no-repeat;
                 size: cover;

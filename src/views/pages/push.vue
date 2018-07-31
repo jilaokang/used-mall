@@ -1,14 +1,20 @@
 <template>
     <div>
+        <div id="carmer">
+            <div class="iconfont icon-scarmera"></div>
+            <input id="file" type="file" @change="changeImg"
+                   style="opacity: 0;float: left;right: 10rem;width: 100vw;margin-top: -60px;height: 10vh">
+        </div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="" placeholder="请填写产品标题（品牌，型号）"/>
+                    <input v-model="data.g_title" class="weui-input"
+                           placeholder="请填写产品标题（品牌，型号）"/>
                 </div>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" rows="5" placeholder="请描述产品详情">
+                    <textarea v-model="data.g_content" class="weui-textarea" rows="5" placeholder="请描述产品详情">
                     </textarea>
                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                 </div>
@@ -21,8 +27,8 @@
                     <label class="weui-label">分类</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">请选择分类</option>
+                    <select class="weui-select" name="select2" @change="getsort">
+                        <option v-for="item in list" :value="item.sort">{{item.cate_name}}</option>
                     </select>
                 </div>
             </div>
@@ -31,7 +37,8 @@
                     <span>￥</span>
                 </div>
                 <div class="weui-cell__hd">
-                    <input class="weui-input" type="number" pattern="" style="width: 60px;text-align: center"
+                    <input v-model="data.g_price" class="weui-input" type="number" pattern=""
+                           style="width: 60px;text-align: center"
                            placeholder="00.0"/>
                 </div>
                 <div class="weui-cell__hd">
@@ -40,36 +47,10 @@
             </div>
             <placeholder></placeholder>
         </div>
-        <div class="weui-cells">
-            <div class="weui-cell">
-                <div class="weui-uploader">
-                    <div class="weui-uploader__hd">
-                        <p class="weui-uploader__title">图片上传</p>
-                    </div>
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files" id="uploaderFiles">
-                            <li class="weui-uploader__file weui-uploader__file_status">
-                                <div class="weui-uploader__file-content">50%</div>
-                            </li>
-                            <li class="weui-uploader__file weui-uploader__file_status">
-                                <div class="weui-uploader__file-content">50%</div>
-                            </li>
-                            <li class="weui-uploader__file weui-uploader__file_status">
-                                <div class="weui-uploader__file-content">50%</div>
-                            </li>
-                        </ul>
-                        <div class="weui-uploader__input-box">
-                            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*"
-                                   multiple/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <placeholder></placeholder>
         <div class="weui-cells">
             <div class="weui-cell">
-                <a class="weui-btn weui-btn_primary" style="width: 60%">发布商品</a>
+                <a class="weui-btn weui-btn_primary" @click="pushgood" style="width: 60%">发布商品</a>
             </div>
         </div>
     </div>
@@ -77,19 +58,100 @@
 
 <script>
     import placeholder from '../components/placeholder'
+    import {goodclass, goodpush, mypush} from '../../service/data'
 
     export default {
         name: "push",
-        components: {placeholder}
+        components: {placeholder},
+        data() {
+            return {
+                data: {
+                    id:"",
+                    openid: "6C283EC8738F4CA70E64FFC46DFAF51E",
+                    g_title: "",
+                    g_price: "",
+                    g_content: "",
+                    cate_id: 1,
+                    g_pic: []
+                },
+                list: []
+            }
+        },
+        created() {
+            goodclass()
+                .then(res => {
+                    this.list = res.data.list;
+                    this.data.cate_id = res.data.list[0].cate_id
+
+                    // console.log(res.data.list)
+                })
+
+            let hash = location.hash.split("#")[2];
+
+            if (hash) {
+                mypush(hash).then(res => {
+                    for (let item of res.data.list) {
+                        item.id === hash ? this.data=item : null;
+                    }
+                })
+            }
+
+        },
+        methods: {
+            changeImg(e) {
+                for (const file of e.target.files) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = (f) => {
+                        this.data.g_pic.push(f.target.result);
+                        weui.alert(`第${this.data.g_pic.length}图片上传成功`)
+                    };
+                }
+                console.log(this.data.g_pic)
+            },
+            getsort(value) {
+                let dom = document.querySelector('.weui-select')
+                this.data.cate_id = dom.value
+            },
+            pushgood() {
+
+                console.log(this.data.g_pic)
+                goodpush(this.data).then(res => {
+                    weui.alert(res.data.msg)
+                    console.log(res.data)
+                })
+            }
+        }
     }
 </script>
 
 <style lang="scss" scoped>
+    @import "../scss/var";
+
     #postpic {
         width: 100vh;
         height: 30vh;
         display: table-cell;
         text-align: center;
         vertical-align: middle;
+    }
+
+    .weui-btn {
+        line-height: 2.5;
+        font-size: 1rem;
+    }
+
+    #carmer {
+        width: 100vh;
+        height: 20vh;
+        display: table-cell;
+        vertical-align: middle;
+        background-color: white;
+        border-bottom: 1px solid $color-grey__bg;
+        .iconfont {
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+        }
     }
 </style>

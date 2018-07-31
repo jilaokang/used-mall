@@ -18,7 +18,7 @@ const transFormer = (data) => {
 };
 
 
-function _axios(method, url, data, needTransform) {
+function getData(method, url, data, needTransform) {
     return axios({
         url: url,
         method: method,
@@ -31,22 +31,22 @@ function _axios(method, url, data, needTransform) {
 }
 
 // 1，首页
-export const home = _axios('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Shouye/index')
+export const home = getData('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Shouye/index')
 
 // 2，首页更多
-export const homemore = (type, page) => _axios('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/index', {
+export const homemore = (type, page) => getData('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/index', {
     type,
     page
 });
 
 // 3，商品详情
-export const gooddetail = (id) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/goodxq', {id: id});
+export const gooddetail = (id) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/goodxq', {id: id});
 
 // 4，商品的分类
-export const goodclass = () => _axios('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/fenlei');
+export const goodclass = () => getData('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/fenlei');
 
 // 5，发布商品
-export const goodpush = (obj) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/add_good', {
+export const goodpush = (obj) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/add_good', {
     openid: obj.openid,
     g_title: obj.g_title,
     g_price: obj.g_price,
@@ -56,34 +56,34 @@ export const goodpush = (obj) => _axios('post', 'http://whschoolbbs.tenqent.com/
 });
 
 // 6，消息列表
-export const messagelist = () => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/zxlist', {openid: openid});
+export const messagelist = () => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/zxlist', {openid: openid});
 
 // 7，聊天咨询窗口的信息显示
-export const messagechat = (id, fa_openid) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/zixun', {
-    openid:openid,
-    id:id,
+export const messagechat = (id, fa_openid) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/zixun', {
+    openid,
+    id,
     fa_openid
 });
 
 // 8，提交聊天内容
-export const messagepush = (fa_openid, art_id, message) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/add_zixun', {
-    openid: openid,
+export const messagepush = (fa_openid, art_id, message) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/add_zixun', {
+    openid,
     fa_openid,
     art_id,
     message
 });
 
 // 9，个人中心
-export const personcenter = () => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/userinfo', {openid: openid});
+export const personcenter = () => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/userinfo', {openid});
 
 // 10，我的发布
-export const mypush = () => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/mygood', {openid});
+export const mypush = () => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/mygood', {openid});
 
 // 11，编辑商品页面信息
-export const mygood = (id) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/goodxqs', {id});
+export const mygood = (id) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/goodxqs', {id});
 
 // 12，编辑提交商品
-export const pushgood = (id, g_title, g_pic, cate_id, g_price, g_content) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/good_edit', {
+export const pushgood = (id, g_title, g_pic, cate_id, g_price, g_content) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/good_edit', {
     id,
     g_title,
     g_pic,
@@ -93,18 +93,18 @@ export const pushgood = (id, g_title, g_pic, cate_id, g_price, g_content) => _ax
 });
 
 // 13，删除我发布的商品
-export const delgood = (id) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/dels', {id});
+export const delgood = (id) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/dels', {id});
 
 // 14，我的收藏
-export const lovegood = () => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/scang', {openid});
+export const lovegood = () => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/scang', {openid});
 
 // 15，添加和删除收藏
-export const deladd = (art_id) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/add_collect', {
+export const deladd = (art_id) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/add_collect', {
     openid,
-    art_id: art_id
+    art_id
 });
 
 // 16，产品搜索
-export const Search = (keyword) => _axios('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Search/search', {keyword});
+export const Search = (keyword) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Search/search', {keyword});
 
 

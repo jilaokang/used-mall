@@ -46,12 +46,15 @@
                 }
             }
         },
+        mounted(){
+            weui.searchBar('#searchBar');
+        },
         methods: {
             searchinit() {
                 let dom = document.getElementsByClassName('weui-search-bar__input')[0]
                 Search(dom.value).then(res => {
                     this.resultarr = []
-                    if (res.data.error != -1) {
+                    if (res.data.error !== -1) {
                         this.resultarr.data = res.data.data || [];
                     }
                 })

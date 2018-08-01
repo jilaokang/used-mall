@@ -16,8 +16,8 @@
             <div class="weui-cell">
                 {{good.data.g_content}}
             </div>
-            <div class="imgcontent weui-cell">
-                <img :src="'http://whschoolbbs.tenqent.com' + good.data.g_pic">
+            <div class="imgcontent weui-cell" v-for="item in JSON.parse(good.data.g_pic)">
+                <img :src="item">
             </div>
         </div>
 

@@ -5,6 +5,18 @@
             <input id="file" type="file" @change="changeImg"
                    style="opacity: 0;float: left;right: 10rem;width: 100vw;margin-top: -60px;height: 10vh">
         </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+                            <li class="weui-uploader__file" v-for="item in data.g_pic"
+                                :style="'background-image:url('+item+')'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -66,7 +78,7 @@
         data() {
             return {
                 data: {
-                    id:"",
+                    id: "",
                     openid: "6C283EC8738F4CA70E64FFC46DFAF51E",
                     g_title: "",
                     g_price: "",
@@ -74,7 +86,8 @@
                     cate_id: 1,
                     g_pic: []
                 },
-                list: []
+                list: [],
+                listimg: []
             }
         },
         created() {
@@ -82,17 +95,18 @@
                 .then(res => {
                     this.list = res.data.list;
                     this.data.cate_id = res.data.list[0].cate_id
-
-                    // console.log(res.data.list)
                 })
 
             let hash = location.hash.split("#")[2];
 
             if (hash) {
                 mypush(hash).then(res => {
+                    console.log(this.data)
+
                     for (let item of res.data.list) {
-                        item.id === hash ? this.data=item : null;
+                        item.id === hash ? this.data = item : null;
                     }
+                    this.data.g_pic = JSON.parse(this.data.g_pic)
                 })
             }
 
@@ -103,22 +117,23 @@
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = (f) => {
-                        this.data.g_pic.push(f.target.result);
+                        let arr = [];
+                        arr[0] = f.target.result.toString();
+                        this.data.g_pic = this.data.g_pic.concat(...arr);
                         weui.alert(`第${this.data.g_pic.length}图片上传成功`)
                     };
                 }
                 console.log(this.data.g_pic)
+
             },
-            getsort(value) {
+            getsort() {
                 let dom = document.querySelector('.weui-select')
                 this.data.cate_id = dom.value
             },
             pushgood() {
-
-                console.log(this.data.g_pic)
+                console.log(this.data)
                 goodpush(this.data).then(res => {
                     weui.alert(res.data.msg)
-                    console.log(res.data)
                 })
             }
         }

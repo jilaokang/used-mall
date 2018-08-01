@@ -1,7 +1,19 @@
 <template>
     <div>
-        <div class="topimg">
+        <div class="swiper-container" style="width: 100vw;height: 28vh">
+            <div class="swiper-wrapper">
+
+
+                <div class="swiper-slide" v-for="item in banner">
+                    <div :style="'background-image: url('+'http://whschoolbbs.tenqent.com'+item.bimg+')'"
+                         style="background: no-repeat;background-size: cover;width: 100vw;height: 28vh"
+                    ></div>
+                </div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
         </div>
+
         <menulist></menulist>
         <news :data="news"></news>
         <div class="weui-cells__title">为您推荐
@@ -27,6 +39,7 @@
     import news from '../components/news'
     import placeholder from '../components/placeholder'
     import nomore from '../components/nomore'
+    import Swiper from 'swiper/dist/js/swiper.min.js'
 
     import {home} from '../../service/data'
 
@@ -53,7 +66,18 @@
                 this.tui = res.data.tui;
                 this.look = res.data.look;
 
-                console.log(this.look)
+                console.log(res.data)
+            })
+        },
+        mounted() {
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay:true,
+                longSwipesRatio: 0.05,
+
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
             })
         }
     };
@@ -62,6 +86,7 @@
 <style lang="scss" scoped>
     @import url("http://at.alicdn.com/t/font_675461_2x7sbu9j2zw7b9.css");
     @import "../scss/var";
+    @import "~swiper/dist/css/swiper.min.css";
 
     .topimg {
         height: 26vh;

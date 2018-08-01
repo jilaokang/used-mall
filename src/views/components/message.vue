@@ -1,7 +1,7 @@
 <template class="message">
     <div>
         <div class="weui-cells" v-for="item of data.mess">
-            <router-link :to="'/chat#' + item.id +'#'+item.openid">
+            <router-link :to="'/chat#' + item.good_id +'#'+item.openid">
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
                         <img class="avator" :src="item.headimgurl">
@@ -12,7 +12,7 @@
                         <p class="time">{{item.now_time}}</p>
                     </div>
                     <div class="weui-cell__hd goodimg"
-                         :style="'background-image:url('+'http://whschoolbbs.tenqent.com'+item.g_pic+')'">
+                         :style="'background-image:url('+JSON.parse(item.g_pic)+')'">
                     </div>
                 </div>
             </router-link>
@@ -57,7 +57,6 @@
             position: center;
             repeat: no-repeat;
             size: cover;
-            /*image: url("../../assets/img/6E6F1DB90378F60CFAE0F9DE2C00B79B.jpg");*/
         }
     }
 

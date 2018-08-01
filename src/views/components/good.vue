@@ -3,7 +3,7 @@
         <div class="weui-cells good" v-for="item in data">
             <router-link :to="'/detail#'+item.id">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd good__img" :style="'background-image:url('+'http://whschoolbbs.tenqent.com'+item.g_pic+')'">
+                    <div class="weui-cell__hd good__img" :style="'background-image:url('+JSON.parse(item.g_pic)[0]+')'">
                     </div>
                     <div class="weui-cell__bd good—list">
                         <div class="good-list__title">

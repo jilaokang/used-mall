@@ -7,6 +7,7 @@ let openid = "6C283EC8738F4CA70E64FFC46DFAF51E";
 //         console.log(res.data)
 //     })
 
+
 const transFormer = (data) => {
     let str = '';
     if (data) {
@@ -107,4 +108,5 @@ export const deladd = (art_id) => getData('post', 'http://whschoolbbs.tenqent.co
 // 16，产品搜索
 export const Search = (keyword) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Search/search', {keyword});
 
-
+// 17，商品搜索
+export const Searchlist = () => getData('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Search/keyword')

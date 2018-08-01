@@ -1,6 +1,7 @@
 <template>
     <div id="chat">
-        <div class="message weui-cells" v-for="item in data.msg">
+        <good :data="artxq"></good>
+        <div class="message weui-cells" v-for="item in data.mess">
             <div class="weui-cell">
                 <div class="weui-cell__hd img">
                     <img :src="item.headimgurl" class="avator" alt="">
@@ -26,41 +27,49 @@
 </template>
 
 <script>
-    import nomore from '../components/nomore'
     import {messagechat, messagepush} from "../../service/data";
+    import good from '../components/good'
 
     export default {
-        components: {nomore},
+        components: {good},
         data() {
             return {
                 content: "",
                 data: {
-                    msg: []
-                }
+                    mess: [],
+                },
+                artxq: []
             }
         },
-        created() {
+        mounted() {
             let hash = location.hash.split("#")
+
+            // setInterval(()=>{
+            //     messagechat(hash[2], hash[3])
+            //         .then(res => {
+            //             this.data = res.data;
+            //             console.log(this.data.mess)
+            //         })
+            // },1000)
+
             messagechat(hash[2], hash[3])
                 .then(res => {
-                    this.data.msg = res.data.mess;
-                    console.log(this.data.msg)
-                    console.log(res.data,hash[2],hash[3])
+                    this.data = res.data;
+                    this.artxq.push(res.data.artxq)
+                    console.log(this.data.mess)
                 })
         },
         methods: {
             pushcontent() {
                 let contentdom = document.getElementById('content')
                 let hash = location.hash.split('#');
-
                 messagepush(hash[3], hash[2], contentdom.value)
+                contentdom.value = null;
+
+                messagechat(hash[2], hash[3])
                     .then(res => {
-                        messagechat(hash[2], hash[3])
-                            .then(res => {
-                                this.data.msg = res.data.mess;
-                                console.log(this.data.msg)
-                            });
-                        contentdom.value = ''
+                        this.data = res.data;
+                        console.log(this.data)
                     })
             }
         }

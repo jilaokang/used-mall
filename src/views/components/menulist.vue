@@ -41,7 +41,7 @@
         .icon{
             width: $font-size-icon;
             height: $font-size-icon;
-            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            background-image: linear-gradient(120deg, #f6d20c 0%, $color-orange 100%);
             border-radius: 50%;
             padding: 6px;
             margin: 0 auto;

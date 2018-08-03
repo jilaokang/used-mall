@@ -84,11 +84,16 @@
                     cate_id: 1,
                     g_pic: []
                 },
+                aaa:[1,2,3,4,5,8,6,8],
                 list: [],
                 listimg: []
             }
         },
         created() {
+
+            window.aaa = this.data.g_pic
+
+
             goodclass()
                 .then(res => {
                     this.list = res.data.list;
@@ -104,6 +109,7 @@
                     for (let item of res.data.list) {
                         item.id === hash ? this.data = item : null;
                     }
+
                     this.data.g_pic = JSON.parse(this.data.g_pic)
                 })
             }
@@ -115,9 +121,9 @@
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = (f) => {
-                        let arr = [];
-                        arr[0] = f.target.result.toString();
-                        this.data.g_pic = this.data.g_pic.concat(...arr);
+                        let a = f.target.result
+                        this.data.g_pic.push(a)
+                        console.log(this.data.g_pic)
                         weui.alert(`第${this.data.g_pic.length}图片上传成功`)
                     };
                 }
@@ -141,7 +147,9 @@
 
 <style lang="scss" scoped>
     @import "../scss/var";
-
+    *{
+        font-size: 0.9rem;
+    }
     #postpic {
         width: 100vh;
         height: 30vh;

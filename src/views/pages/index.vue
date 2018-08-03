@@ -1,9 +1,7 @@
 <template>
     <div>
-        <div class="swiper-container" style="width: 100vw;height: 28vh">
+        <div class="swiper-container">
             <div class="swiper-wrapper">
-
-
                 <div class="swiper-slide" v-for="item in banner">
                     <div :style="'background-image: url('+'http://whschoolbbs.tenqent.com'+item.bimg+')'"
                          style="background: no-repeat;background-size: cover;width: 100vw;height: 28vh"
@@ -13,7 +11,6 @@
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
         </div>
-
         <menulist></menulist>
         <news :data="news"></news>
         <div class="weui-cells__title">为您推荐
@@ -65,21 +62,24 @@
                 this.news = res.data.news;
                 this.tui = res.data.tui;
                 this.look = res.data.look;
-
                 console.log(res.data)
             })
         },
-        mounted() {
-            new Swiper('.swiper-container', {
-                autoplay: true,
-                // longSwipesRatio: 0.1,
-
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-            })
-        }
     };
+
+
+    window.onload = function () {
+        new Swiper('.swiper-container', {
+            autoplay: true,
+            longSwipesRatio: 0.1,
+
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        })
+
+        console.log('aa')
+    }
 </script>
 
 <style lang="scss" scoped>

@@ -44,13 +44,13 @@
         mounted() {
             let hash = location.hash.split("#")
 
-            // setInterval(()=>{
-            //     messagechat(hash[2], hash[3])
-            //         .then(res => {
-            //             this.data = res.data;
-            //             console.log(this.data.mess)
-            //         })
-            // },1000)
+            setInterval(()=>{
+                messagechat(hash[2], hash[3])
+                    .then(res => {
+                        this.data = res.data;
+                        console.log(this.data.mess)
+                    })
+            },1000)
 
             messagechat(hash[2], hash[3])
                 .then(res => {
@@ -86,23 +86,19 @@
         overflow-y: auto;
         margin-bottom: 150px;
         .weui-cell__bd {
-            border: 1px solid #666;
-            border-radius: 8px;
-            margin-right: 20px;
-            padding: 0 10px;
-            margin-top: 8px;
-            margin-bottom: 8px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            margin-right: 12px;
             textarea {
-                line-height: 1;
-                height: 14px;
                 font-size: 0.8rem;
             }
         }
-
         .bottom {
             width: 100vw;
             position: fixed;
             bottom: 0;
+            display: table-cell;
+            vertical-align: center;
         }
     }
 

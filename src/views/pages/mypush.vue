@@ -27,7 +27,6 @@
 
 
     export default {
-        name: "mygood",
         data() {
             return {
                 data: {}
@@ -52,19 +51,7 @@
                     })
 
                     this.data = res.data.list
-
-                    // 垃圾json解析器
-                    // let formdata = res.data.list
-                    // let formarr = []
-                    // res.data.list.forEach((value, index) => {
-                    //     // 清除字符串中的 \
-                    //     let str = value.g_pic.replace('', '').replace(/[\\]/g, '');
-                    //     // 解析字符串取第一个值
-                    //     formarr.push(str.split('"')[1])
-                    //     // 值替换
-                    //     formdata[index].g_pic = formarr[index]
-                    // });
-                    // this.data = formdata;
+                    console.log(this.data)
                 })
             }
         }

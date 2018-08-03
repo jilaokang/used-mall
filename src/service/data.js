@@ -1,10 +1,16 @@
 import axios from 'axios'
 
 let openid = "6C283EC8738F4CA70E64FFC46DFAF51E";
-
-// let openID = axios.get('http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/get_openid')
+// let openid = '';
+// axios.get('http://whschoolbbs.tenqent.com/index.php?s=/Api/UserInfo/get_openid')
 //     .then(res => {
-//         console.log(res.data)
+//         openid = res.data.openid;
+//     })
+//     .catch(err => {
+//         console.log(err)
+//
+//         window.location = 'http://whschoolbbs.tenqent.com/index.php?s=/Wechat/Deng/deng'
+//
 //     })
 
 

@@ -59,4 +59,10 @@
             }
         }
     }
+
+    .weui-cell {
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 5px;
+        margin:8px 16px;
+    }
 </style>

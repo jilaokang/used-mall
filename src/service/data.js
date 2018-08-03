@@ -110,3 +110,6 @@ export const Search = (keyword) => getData('post', 'http://whschoolbbs.tenqent.c
 
 // 17，商品搜索
 export const Searchlist = () => getData('get', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Search/keyword')
+
+// 18，商品分类
+export const goodsort = (cate_id) => getData('post', 'http://whschoolbbs.tenqent.com/index.php?s=/Api/Good/goodlist', {cate_id: cate_id})

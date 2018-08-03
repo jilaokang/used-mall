@@ -70,11 +70,10 @@
             })
         },
         mounted() {
-            var mySwiper = new Swiper('.swiper-container', {
-                autoplay:true,
-                longSwipesRatio: 0.05,
+            new Swiper('.swiper-container', {
+                autoplay: true,
+                // longSwipesRatio: 0.1,
 
-                // 如果需要分页器
                 pagination: {
                     el: '.swiper-pagination',
                 },

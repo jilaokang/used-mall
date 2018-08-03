@@ -16,7 +16,7 @@
 <script>
     import good from '../components/good'
     import nomore from '../components/nomore'
-    import {home} from "../../service/data";
+    import {home, goodsort} from "../../service/data"
 
     export default {
         name: "list",
@@ -32,7 +32,26 @@
         components: {good, nomore},
         created() {
             home.then(res => {
-                this.goodarr.data = location.hash === "#/list#tui" ? res.data.tui : res.data.look;
+                switch (location.hash) {
+                    case '#/list#tui': {
+                        this.goodarr.data = res.data.tui;
+                        break;
+                    }
+                    case '#/list#look': {
+                        this.goodarr.data = res.data.look;
+                        break;
+                    }
+                    default: {
+                        let hash = location.hash.split('#')[2];
+                        goodsort(hash)
+                            .then(res=>{
+                                this.goodarr.data = res.data.data
+                                console.log(res.data)
+                            })
+                    }
+
+                }
+                console.log(res.data)
             })
         },
         methods: {

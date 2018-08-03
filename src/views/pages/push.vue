@@ -57,9 +57,7 @@
                     <span>元</span>
                 </div>
             </div>
-            <placeholder></placeholder>
         </div>
-        <placeholder></placeholder>
         <div class="weui-cells">
             <div class="weui-cell">
                 <a class="weui-btn weui-btn_primary" @click="pushgood" style="width: 60%">发布商品</a>
@@ -129,6 +127,7 @@
             getsort() {
                 let dom = document.querySelector('.weui-select')
                 this.data.cate_id = dom.value
+                console.log(this.data.cate_id)
             },
             pushgood() {
                 console.log(this.data)
